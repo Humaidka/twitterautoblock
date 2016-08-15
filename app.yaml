@@ -1,9 +1,0 @@
-application: twitterautoblock
-version: 1
-runtime: java
-api_version: 1
-threadsafe: true
-
-handlers:
-- url: /
-  script: TwitterAutoBlock
