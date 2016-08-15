@@ -1,4 +1,4 @@
-package com.parisofnajd.twitterappblock;
+package com.parisofnajd.twitterautoblock;
 
 import java.io.IOException;
 import javax.servlet.http.*;
