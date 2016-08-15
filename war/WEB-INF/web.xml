@@ -5,12 +5,12 @@ xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet>
-		<servlet-name>TwitterAutoBlocker</servlet-name>
-		<servlet-class>com.parisofnajd.twitterappblocker.TwitterAutoBlockerServlet</servlet-class>
+		<servlet-name>TwitterAutoBlock</servlet-name>
+		<servlet-class>com.parisofnajd.twitterautoblock.TwitterAutoBlockServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>TwitterAutoBlocker</servlet-name>
-		<url-pattern>/twitterautoblocker</url-pattern>
+		<servlet-name>TwitterAutoBlock</servlet-name>
+		<url-pattern>/twitterautoblock</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
