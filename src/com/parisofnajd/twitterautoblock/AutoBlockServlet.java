@@ -17,25 +17,28 @@ import twitter4j.auth.RequestToken;
 public class AutoBlockServlet extends HttpServlet {
 	private static final Logger log = Logger.getLogger(AutoBlockServlet.class.getName());
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		 Twitter twitter = new TwitterFactory().getInstance();
-		 HttpSession session = req.getSession();
+		HttpSession session = req.getSession(); 
+		Twitter twitter = new TwitterFactory().getInstance();
+		 
 		 AccessToken accessToken = null;
 		 if ( session.getAttribute("access_token") == null)
 			{
 			 log.info("Twitter Auto Block: access_token is null");
 			 RequestToken requestToken = (RequestToken) session.getAttribute("request_token");
 			 log.info("request_token: "+requestToken.toString());
+			
 		 try { 
 		        	   accessToken = twitter.getOAuthAccessToken(requestToken,req.getParameter("oauth_verifier"));
-		        	   log.info("Twitter Auto Block: request_token: "+requestToken.toString());
-		        	   resp.getWriter().println(accessToken.toString());
+		        	   log.info("Twitter Auto Block: acess_token: "+accessToken.toString());
 		        	   session.setAttribute("access_token", accessToken);
 		 } catch (TwitterException e) {
 					e.printStackTrace();
 		}
 			}
 		 else {
-		 accessToken = (AccessToken) session.getAttribute("access_token");
+			 log.info("Twitter Auto Block: access_token is not null, fetching from session");
+			 accessToken = (AccessToken) session.getAttribute("access_token");
+			 twitter = new TwitterFactory().getInstance(accessToken);
 		 }
 		 log.info("Twitter Auto Block: access_token: "+accessToken.toString());
 		 Query query = new Query("%40GaryLineker");
