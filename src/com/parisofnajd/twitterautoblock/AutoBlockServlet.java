@@ -23,7 +23,7 @@ public class AutoBlockServlet extends HttpServlet {
 		AccessToken accessToken = (AccessToken) session.getAttribute("access_token");
 		if (requestToken == null && accessToken == null){
 			log.info("Twitter Auto Block: both access_token and request_token are null, redirecting to authentication servlet");
-			resp.sendRedirect("/authenticate");
+			resp.sendRedirect("/authorize");
 		}
 		else {
 			Twitter twitter = new TwitterFactory().getInstance();
@@ -40,6 +40,10 @@ public class AutoBlockServlet extends HttpServlet {
 				log.info("Twitter Auto Block: access_token is not null, creating twitter object from session");
 				twitter = new TwitterFactory().getInstance(accessToken);
 			}
+			log.info("Twitter Auto Block: "+accessToken.getScreenName());
+			log.info("Twitter Auto Block: "+accessToken.getToken());
+			log.info("Twitter Auto Block: "+accessToken.getTokenSecret());
+			log.info("Twitter Auto Block: "+accessToken.getUserId());
 			Query query = new Query();
 			query.count(100);
 			query.query("%40GaryLineker");
@@ -47,9 +51,9 @@ public class AutoBlockServlet extends HttpServlet {
 				QueryResult result = twitter.search(query);
 				for (Status status : result.getTweets()) {
 					String InReplyToScreenName = status.getInReplyToScreenName();
-					log.info("Twitter Auto Block: "+status.getInReplyToScreenName());
+					//log.info("Twitter Auto Block: "+status.getInReplyToScreenName());
 					if (InReplyToScreenName!= null && InReplyToScreenName.equals("GaryLineker")){
-						log.info("Twitter Auto Block: "+status.getInReplyToScreenName());
+						//log.info("Twitter Auto Block: "+status.getInReplyToScreenName());
 						resp.getWriter().println("@" + status.getUser().getScreenName() + ":" + status.getText());
 					}
 				}

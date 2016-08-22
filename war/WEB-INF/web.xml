@@ -5,16 +5,16 @@ xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet>
-		<servlet-name>Authenticate</servlet-name>
-		<servlet-class>com.parisofnajd.twitterautoblock.AuthenticateServlet</servlet-class>
+		<servlet-name>Authorize</servlet-name>
+		<servlet-class>com.parisofnajd.twitterautoblock.AuthorizeServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>AutoBlock</servlet-name>
 		<servlet-class>com.parisofnajd.twitterautoblock.AutoBlockServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Authenticate</servlet-name>
-		<url-pattern>/authenticate</url-pattern>
+		<servlet-name>Authorize</servlet-name>
+		<url-pattern>/authorize</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>AutoBlock</servlet-name>
