@@ -13,7 +13,7 @@ import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
-
+  
 @SuppressWarnings("serial")
 public class AutoBlockServlet extends HttpServlet {
 	private static final Logger log = Logger.getLogger(AutoBlockServlet.class.getName());
