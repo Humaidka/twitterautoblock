@@ -40,10 +40,12 @@ public class AutoBlockServlet extends HttpServlet {
 				log.info("Twitter Auto Block: access_token is not null, creating twitter object from session");
 				twitter = new TwitterFactory().getInstance(accessToken);
 			}
+			
 			log.info("Twitter Auto Block: "+accessToken.getScreenName());
 			log.info("Twitter Auto Block: "+accessToken.getToken());
 			log.info("Twitter Auto Block: "+accessToken.getTokenSecret());
 			log.info("Twitter Auto Block: "+accessToken.getUserId());
+			AccessTokenEntity.persist(accessToken.getUserId(),accessToken.getScreenName(),accessToken.getToken(),accessToken.getTokenSecret());
 			Query query = new Query();
 			query.count(100);
 			query.query("%40GaryLineker");
