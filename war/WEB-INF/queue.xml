@@ -1,0 +1,10 @@
+<queue-entries>
+  <queue>
+    <name>autoblockqueue</name>
+    <rate>1/s</rate>
+    <max-concurrent-requests>5</max-concurrent-requests>
+    <retry-parameters>
+      <task-retry-limit>0</task-retry-limit>
+    </retry-parameters>
+  </queue>
+</queue-entries>

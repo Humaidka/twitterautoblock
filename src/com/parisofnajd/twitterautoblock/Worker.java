@@ -14,23 +14,20 @@ import twitter4j.auth.AccessToken;
 
   
 @SuppressWarnings("serial")
-public class AutoBlockFromDatastoreServlet extends HttpServlet {
-	private static final Logger log = Logger.getLogger(AutoBlockFromDatastoreServlet.class.getName());
+public class Worker extends HttpServlet {
+	private static final Logger log = Logger.getLogger(Worker.class.getName());
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		String at=AccessTokenEntity.fetchAccessToken(32878394);
-		String ats=AccessTokenEntity.fetchAccessTokenSecret(32878394);
-		log.info("Twitter Auto Block access token for userid "+32878394+" is "+at);
-		log.info("Twitter Auto Block access token secret for userid "+32878394+" is "+ats);
+		String userid = req.getParameter("userid");
+		log.info("Twitter Auto Block: "+userid);
+
+		String at=AccessTokenEntity.fetchAccessToken(Long.getLong(userid));
+		String ats=AccessTokenEntity.fetchAccessTokenSecret(Long.getLong(userid));
 		Twitter twitter = new TwitterFactory().getInstance();
 		AccessToken accessToken= new AccessToken(at,ats);
 		twitter = new TwitterFactory().getInstance(accessToken);
-		log.info("Twitter Auto Block: "+accessToken.getScreenName());
-		log.info("Twitter Auto Block: "+accessToken.getToken());
-		log.info("Twitter Auto Block: "+accessToken.getTokenSecret());
-		log.info("Twitter Auto Block: "+accessToken.getUserId());
 		Query query = new Query();
 		query.count(100);
-		query.query("%40GaryLineker");
+		query.query(accessToken.getScreenName());
 		try {
 			QueryResult result = twitter.search(query);
 			for (Status status : result.getTweets()) {
@@ -46,7 +43,3 @@ public class AutoBlockFromDatastoreServlet extends HttpServlet {
 		}
 	}
 }
-	  
-
-
-

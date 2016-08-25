@@ -13,18 +13,18 @@ import twitter4j.auth.RequestToken;
 
 
 @SuppressWarnings("serial")
-public class AuthorizeServlet extends HttpServlet {
+public class Authorize extends HttpServlet {
 	public void doGet(HttpServletRequest req,   HttpServletResponse resp) throws IOException {
 		String authurl;
 		try {
-			authurl = AuthorizeServlet.Authorize(req);
+			authurl = authorize(req);
 			resp.sendRedirect(authurl);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private static  String Authorize(HttpServletRequest req) throws Exception{
+	private static  String authorize(HttpServletRequest req) throws Exception{
 		Twitter twitter = new TwitterFactory().getInstance();
 		RequestToken requestToken = twitter.getOAuthRequestToken();
 		HttpSession session = req.getSession();
