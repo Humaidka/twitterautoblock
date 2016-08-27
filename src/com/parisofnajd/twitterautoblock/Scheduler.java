@@ -32,10 +32,6 @@ public class Scheduler extends HttpServlet {
 			long userid = (long) temp.getProperty("UserID");
 			enqueue(userid);
 		}
-			//log.info("Twitter Auto Block : persisting user info in datastore");
-			//enqueue((Long)userid);
-	
-		//loop through all AccessTokens and call scheduler
 		
 	
 	}
