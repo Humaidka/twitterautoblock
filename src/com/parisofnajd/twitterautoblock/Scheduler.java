@@ -21,15 +21,23 @@ public class Scheduler extends HttpServlet {
 	private static final Logger log = Logger.getLogger(Scheduler.class.getName());
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
-		Query q = new Query("AccessToken");
+		Query q = new Query("AccessTokens");
 		q.addProjection(new PropertyProjection("UserID", Long.class));
-		List<Entity> results =
-			    ds.prepare(q).asList(FetchOptions.Builder.withDefaults());
+		List<Entity> results = ds.prepare(q).asList(FetchOptions.Builder.withDefaults());
 		
-		log.info("Twitter Auto Block : " + results.toString());
+		//log.info("Twitter Auto Block : " + results.toString());
 		
+		for (Entity temp : results) {
+			//log.info("Twitter Auto Block : " + temp.toString());
+			long userid = (long) temp.getProperty("UserID");
+			enqueue(userid);
+		}
 			//log.info("Twitter Auto Block : persisting user info in datastore");
 			//enqueue((Long)userid);
+	
+		//loop through all AccessTokens and call scheduler
+		
+	
 	}
 	
 	private static void enqueue(Long userid) {
