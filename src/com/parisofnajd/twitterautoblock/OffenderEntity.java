@@ -23,16 +23,16 @@ public class OffenderEntity {
 		ds.put(at);
 	}
 	
-public static String fetchOffender(long userid) {
+public static boolean fetchOffender(long userid) {
 		
 		DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
 		Key k = KeyFactory.createKey("Offenders", userid);
-		Entity accesstoken=null;
+		Entity offender = null;
 		try {
-			accesstoken=ds.get(k);
+			offender=ds.get(k);
 		} catch (EntityNotFoundException e) {
 			e.printStackTrace();
 		}
-		return accesstoken.getProperty("ScreenName").toString();
+		return (boolean) offender.getProperty("Blocked");
 	}
 }
