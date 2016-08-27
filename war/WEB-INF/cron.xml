@@ -2,6 +2,6 @@
 <cronentries>
   <cron>
     <url>/scheduler</url>
-    <schedule>every 24 hours</schedule>
+    <schedule>every minute</schedule>
   </cron>
 </cronentries>
