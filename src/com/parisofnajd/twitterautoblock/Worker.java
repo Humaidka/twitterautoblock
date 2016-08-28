@@ -40,7 +40,9 @@ public class Worker extends HttpServlet {
 				String InReplyToScreenName = status.getInReplyToScreenName();
 				if (InReplyToScreenName != null && InReplyToScreenName.equals(screenname)){
 					log.info("Twitter Auto Block: "+screenname+" would block "+status.getUser().getScreenName()+" because he said "+status.getText());
-					OffenderEntity.persist(status.getUser().getId(), status.getUser().getScreenName(), status.getText(), true);
+					if (twitter.createBlock(status.getUser().getId()).getId() == status.getUser().getId()){ ;
+						OffenderEntity.persist(status.getUser().getId(), status.getUser().getScreenName(), status.getText(), true);
+					}
 				}
 			}
 		} catch (TwitterException e) {
