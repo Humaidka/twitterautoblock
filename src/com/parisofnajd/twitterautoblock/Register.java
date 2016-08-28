@@ -46,7 +46,7 @@ public class Register extends HttpServlet {
 		//The user is not coming from /authorize redirect him (later we can check if he exists in datastore)
 		else {
 			resp.sendRedirect("/authorize");
-		}
+		} 
 	}
 }
 		  
