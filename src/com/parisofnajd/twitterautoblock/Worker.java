@@ -37,6 +37,7 @@ public class Worker extends HttpServlet {
 			QueryResult result = twitter.search(query);
 			//log.info("Twitter Auto Block: "+result.toString());
 			for (Status status : result.getTweets()) {
+				log.info("Twitter Auto Block: "+status.getText());
 				String InReplyToScreenName = status.getInReplyToScreenName();
 				if (InReplyToScreenName != null && InReplyToScreenName.equals(screenname)){
 					log.info("Twitter Auto Block: "+screenname+" would block "+status.getUser().getScreenName()+" because he said "+status.getText());
